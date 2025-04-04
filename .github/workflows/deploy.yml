@@ -1,0 +1,33 @@
+name: Deploy VitePress to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]  # 当 main 分支有推送时触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write  # 允许 GitHub Actions 部署 Pages
+      id-token: write  # 允许 OIDC 认证
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 获取完整 Git 历史（可选）
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20  # 使用 Node.js 20
+
+      - run: npm install  # 安装依赖
+
+      - run: npm run docs:build  # 构建 VitePress 静态文件
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/.vitepress/dist  # 上传构建后的文件
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4  # 自动部署到 gh-pages
