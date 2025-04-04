@@ -1,0 +1,36 @@
+/* 基础字号调整 */
+.katex {
+    font-size: 1.25em; /* 比正文大25% */
+    line-height: 1.6;  /* 调整行高避免重叠 */
+  }
+  
+  /* 行内公式调整 */
+  .katex:not(.katex-display) {
+    font-size: 1.15em; /* 行内公式稍小一点 */
+    vertical-align: middle; /* 与文字中线对齐 */
+  }
+  
+  /* 块级公式调整 */
+  .katex-display > .katex {
+    font-size: 1.4em;  /* 块级公式更大 */
+    margin: 1em 0;     /* 增加上下边距 */
+    padding: 0.5em 0;  /* 增加内边距 */
+  }
+  
+  /* 公式容器背景和边框（可选） */
+  .katex-display {
+    background-color: rgba(0, 0, 0, 0.02); /* 极浅灰色背景 */
+    border-left: 3px solid rgba(0, 122, 204, 0.3); /* 左侧蓝色边框 */
+    padding-left: 12px; /* 左侧内边距 */
+    border-radius: 4px; /* 圆角 */
+  }
+  
+  /* 移动端适配 */
+  @media (max-width: 768px) {
+    .katex {
+      font-size: 1.15em; /* 移动端稍小 */
+    }
+    .katex-display > .katex {
+      font-size: 1.25em;
+    }
+  }
