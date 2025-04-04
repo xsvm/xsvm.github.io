@@ -39,7 +39,8 @@ export default defineConfig({
           items: [
             { text: '开始使用', link: '/articles/getting-started' },
             { text: '01背包问题', link: '/articles/01背包问题' },
-            { text: 'latex-demo', link: '/articles/latex-demo' }
+            { text: 'latex-demo', link: '/articles/latex-demo' },
+            { text: '站点更新', link: '/articles/站点更新' }
           ]
         }
       ]

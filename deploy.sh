@@ -30,6 +30,6 @@ git commit -m "Auto-deploy $(date '+%Y-%m-%d %H:%M:%S')"
 
 # 推送
 echo "Pushing to GitHub..."
-git push -f git@github.com:xsvm/xsvm.github.io.git master:gh-pages
+git push -f git@github.com:xsvm/xsvm.github.io.git main:gh-pages
 
 echo "Deployment successful!"
