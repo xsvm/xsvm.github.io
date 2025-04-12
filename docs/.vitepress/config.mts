@@ -16,7 +16,7 @@ export default defineConfig({
   ],
   // #endregion fav
 
-  base: '/blog/', //网站部署到github的blog仓库里
+  base: '/', //网站部署到github的个人/组织页面
 
   //cleanUrls:true, //开启纯净链接无html
 
