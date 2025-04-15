@@ -7,14 +7,17 @@ import { MermaidMarkdown, MermaidPlugin } from 'vitepress-plugin-mermaid';
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: "VitePress",
+  title: "My Blog",
   description: "我的vitpress文档教程",
-
+  // 站点地图
+  sitemap: {
+    hostname: 'https://xsvm.github.io',
+  },
   // #region fav
   head: [
-    ['link', { rel: 'icon', href: '/logo.png' }],
+    ['link', { rel: 'icon', href: 'https://img.icons8.com/?size=96&id=Fqihn9MGe0kQ&format=png' }],
   ],
-  // #endregion fav
+  // #endregion fav 
 
   base: '/', //网站部署到github的个人/组织页面
 
@@ -104,8 +107,8 @@ export default defineConfig({
   //主题配置
   themeConfig: {
     //左上角logo
-    logo: '/logo.png',
-    //logo: 'https://vitejs.cn/vite3-cn/logo-with-shadow.png', //远程引用
+    // logo: '/logo.png',
+    logo: 'https://img.icons8.com/?size=96&id=Fqihn9MGe0kQ&format=png', //远程引用
     //siteTitle: false, //标题隐藏
 
     //设置站点标题 会覆盖title
@@ -181,6 +184,7 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: '前言', link: '/preface' },
+          { text: 'BF算法', link: '/BF算法' }
         ],
       },
       {
@@ -213,7 +217,7 @@ export default defineConfig({
         ],
       },
       {
-        //分组标题3
+        //分组标题4
         text: '其他站点',
         collapsed: false,
         items: [
