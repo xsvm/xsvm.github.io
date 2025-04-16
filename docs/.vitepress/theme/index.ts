@@ -92,7 +92,7 @@ export default {
     return h(DefaultTheme.Layout, props, {
       'layout-bottom': () => h(bsz), //不蒜子layout-bottom插槽
       'doc-footer-before': () => h(backtotop), // 返回顶部doc-footer-before插槽
-      'layout-top': () => h(notice), // 公告layout-top插槽
+      // 'layout-top': () => h(notice), // 公告layout-top插槽
     })
 
     return h(MyLayout,props)
