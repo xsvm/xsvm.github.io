@@ -309,10 +309,10 @@ export default defineConfig({
 
 
     //页脚
-    footer: {
-      message: 'Released under the MIT License.',
-      copyright: `Copyright © 2023-${new Date().getFullYear()} 备案号：<a href="https://beian.miit.gov.cn/" target="_blank">京****号</a>`,
-    },
+    // footer: {
+    //   message: 'Released under the MIT License.',
+    //   copyright: `Copyright © 2023-${new Date().getFullYear()} 备案号：<a href="https://beian.miit.gov.cn/" target="_blank">京****号</a>`,
+    // },
 
 
     //侧边栏文字更改(移动端)

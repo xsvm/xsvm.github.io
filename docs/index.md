@@ -9,10 +9,11 @@ hero:
   text: "Welcome!"
   tagline: 你好呀
   image:
-    src: /logo.png
+    src: /首页.png
     alt: VitePress
   actions:
-    - theme: brand
+    # - theme: brand
+    - theme: alt
       text: 开始
       link: /getting-started
     # - theme: alt
