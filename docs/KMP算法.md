@@ -1,5 +1,4 @@
 # KMP算法
-$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ## 1. 简介
 `KMP算法`（Knuth-Morris-Pratt）是一种改进的字符串匹配算法，由Donald Knuth、James H. Morris和Vaughan Pratt三人于1977年共同发表。与`BF算法`相比，KMP算法通过利用已经部分匹配这个有效信息，保持主串的指针不回溯，从而大大提高了匹配效率。
 ### 1.1 时间复杂度
