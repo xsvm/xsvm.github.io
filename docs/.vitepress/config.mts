@@ -27,22 +27,22 @@ export default defineConfig({
   appearance: 'dark',
 
   //多语言
-  locales: {
-    root: {
-      label: '简体中文',
-      lang: 'Zh_CN',
-    },
-    en: {
-      label: 'English',
-      lang: 'en',
-      link: '/en/',
-    },
-    fr: {
-      label: 'French',
-      lang: 'fr',
-      link: '/fr/',
-    }
-  },
+  // locales: {
+  //   root: {
+  //     label: '简体中文',
+  //     lang: 'Zh_CN',
+  //   },
+  //   en: {
+  //     label: 'English',
+  //     lang: 'en',
+  //     link: '/en/',
+  //   },
+  //   fr: {
+  //     label: 'French',
+  //     lang: 'fr',
+  //     link: '/fr/',
+  //   }
+  // },
 
   //markdown配置
   markdown: {
@@ -115,10 +115,10 @@ export default defineConfig({
     //siteTitle: 'Hello World',
 
     //编辑本页
-    editLink: {
-      pattern: 'https://github.com/Yiov/vitepress-doc/edit/main/docs/:path', // 改成自己的仓库
-      text: '在GitHub编辑本页'
-    },
+    // editLink: {
+    //   pattern: 'https://github.com/Yiov/vitepress-doc/edit/main/docs/:path', // 改成自己的仓库
+    //   text: '在GitHub编辑本页'
+    // },
 
     //上次更新时间
     lastUpdated: {
@@ -132,47 +132,47 @@ export default defineConfig({
     //导航栏
     nav: [
       { text: '首页', link: '/' },
-      {
-        text: '🍉指南',
-        items: [
-          {
-            // 分组标题1
-            text: '介绍',
-            items: [
-              { text: '前言', link: '/preface' },
-            ],
-          },
-          {
-            // 分组标题2
-            text: '基础设置',
-            items: [
-              { text: '快速上手', link: '/getting-started' },
-              { text: '配置', link: '/configuration' },
-              { text: '页面', link: '/page' },
-              { text: 'Frontmatter', link: '/frontmatter' },
-            ],
-          },
-          {
-            // 分组标题3
-            text: '进阶玩法',
-            items: [
-              { text: 'Markdown', link: '/markdown' },
-              { text: '团队', link: '/team' },
-              { text: '多语言', link: '/multi-language' },
-              { text: 'DocSearch', link: '/docsearch' },
-              { text: '静态部署', link: '/assets' },
-              { text: '样式美化', link: '/style' },
-              { text: '组件', link: '/components' },
-              { text: '布局插槽', link: '/layout' },
-              { text: '插件', link: '/plugin' },
-              { text: '更新及卸载', link: '/update' },
-              { text: '搭建导航', link: '/nav/' },
-            ],
-          },
-        ],
-      },
-      { text: `VitePress ${devDependencies.vitepress.replace('^', '')}`, link: 'https://vitepress.dev/zh/', noIcon: true },
-      { text: '更新日志', link: '/changelog.md' },
+      // {
+      //   text: '🍉指南',
+      //   items: [
+      //     {
+      //       // 分组标题1
+      //       text: '介绍',
+      //       items: [
+      //         { text: '前言', link: '/preface' },
+      //       ],
+      //     },
+      //     {
+      //       // 分组标题2
+      //       text: '基础设置',
+      //       items: [
+      //         { text: '快速上手', link: '/getting-started' },
+      //         { text: '配置', link: '/configuration' },
+      //         { text: '页面', link: '/page' },
+      //         { text: 'Frontmatter', link: '/frontmatter' },
+      //       ],
+      //     },
+      //     {
+      //       // 分组标题3
+      //       text: '进阶玩法',
+      //       items: [
+      //         { text: 'Markdown', link: '/markdown' },
+      //         { text: '团队', link: '/team' },
+      //         { text: '多语言', link: '/multi-language' },
+      //         { text: 'DocSearch', link: '/docsearch' },
+      //         { text: '静态部署', link: '/assets' },
+      //         { text: '样式美化', link: '/style' },
+      //         { text: '组件', link: '/components' },
+      //         { text: '布局插槽', link: '/layout' },
+      //         { text: '插件', link: '/plugin' },
+      //         { text: '更新及卸载', link: '/update' },
+      //         { text: '搭建导航', link: '/nav/' },
+      //       ],
+      //     },
+      //   ],
+      // },
+      // { text: `VitePress ${devDependencies.vitepress.replace('^', '')}`, link: 'https://vitepress.dev/zh/', noIcon: true },
+      // { text: '更新日志', link: '/changelog.md' },
     ],
 
 
@@ -180,52 +180,52 @@ export default defineConfig({
     sidebar: [
       {
         //分组标题1
-        text: '介绍',
+        text: '算法',
         collapsed: false,
         items: [
-          { text: '前言', link: '/preface' },
-          { text: 'BF算法', link: '/BF算法' }
+          
+          { text: 'BF算法', link: '/BF算法' },
         ],
       },
-      {
-        //分组标题2
-        text: '基础配置',
-        collapsed: false,
-        items: [
-          { text: '快速上手', link: '/getting-started' },
-          { text: '配置', link: '/configuration' },
-          { text: '页面', link: '/page' },
-          { text: 'Frontmatter', link: '/frontmatter' },
-        ],
-      },
-      {
-        //分组标题3
-        text: '进阶玩法',
-        collapsed: false,
-        items: [
-          { text: 'Markdown', link: '/markdown' },
-          { text: '团队', link: '/team' },
-          { text: '多语言', link: '/multi-language' },
-          { text: 'DocSearch', link: '/docsearch' },
-          { text: '静态部署', link: '/assets' },
-          { text: '样式美化', link: '/style' },
-          { text: '组件', link: '/components' },
-          { text: '布局插槽', link: '/layout' },
-          { text: '插件', link: '/plugin' },
-          { text: '更新及卸载', link: '/update' },
-          { text: '搭建导航', link: '/nav/' },
-        ],
-      },
-      {
-        //分组标题4
-        text: '其他站点',
-        collapsed: false,
-        items: [
-          { text: 'VuePress', link: 'https://vuepress.yiov.top/' },
-          { text: '劝学录教程', link: 'https://yiov.top/' },
-          { text: '个人主页', link: 'https://yingyayi.com/' },
-        ],
-      },
+      // {
+      //   //分组标题2
+      //   text: '基础配置',
+      //   collapsed: false,
+      //   items: [
+      //     { text: '快速上手', link: '/getting-started' },
+      //     { text: '配置', link: '/configuration' },
+      //     { text: '页面', link: '/page' },
+      //     { text: 'Frontmatter', link: '/frontmatter' },
+      //   ],
+      // },
+      // {
+      //   //分组标题3
+      //   text: '进阶玩法',
+      //   collapsed: false,
+      //   items: [
+      //     { text: 'Markdown', link: '/markdown' },
+      //     { text: '团队', link: '/team' },
+      //     { text: '多语言', link: '/multi-language' },
+      //     { text: 'DocSearch', link: '/docsearch' },
+      //     { text: '静态部署', link: '/assets' },
+      //     { text: '样式美化', link: '/style' },
+      //     { text: '组件', link: '/components' },
+      //     { text: '布局插槽', link: '/layout' },
+      //     { text: '插件', link: '/plugin' },
+      //     { text: '更新及卸载', link: '/update' },
+      //     { text: '搭建导航', link: '/nav/' },
+      //   ],
+      // },
+      // {
+      //   //分组标题4
+      //   text: '其他站点',
+      //   collapsed: false,
+      //   items: [
+      //     { text: 'VuePress', link: 'https://vuepress.yiov.top/' },
+      //     { text: '劝学录教程', link: 'https://yiov.top/' },
+      //     { text: '个人主页', link: 'https://yingyayi.com/' },
+      //   ],
+      // },
     ],
     //本地搜索
     search: { 
