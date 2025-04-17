@@ -185,6 +185,16 @@ export default defineConfig({
         items: [
           
           { text: 'BF算法', link: '/BF算法' },
+          { text: 'kMP算法', link: '/kMP算法' },
+        ],
+      },
+      {
+        //分组标题1
+        text: '数据结构',
+        collapsed: false,
+        items: [
+          
+          { text: 'BF算法', link: '/BF算法' },
         ],
       },
       // {
