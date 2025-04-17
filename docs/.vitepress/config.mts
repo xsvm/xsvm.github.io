@@ -185,7 +185,7 @@ export default defineConfig({
         items: [
           
           { text: 'BF算法', link: '/BF算法' },
-          { text: 'kMP算法', link: '/kMP算法' },
+          { text: 'KMP算法', link: '/KMP算法' },
         ],
       },
       {
