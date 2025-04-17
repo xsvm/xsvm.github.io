@@ -51,7 +51,7 @@ export default defineConfig({
 
     // toc显示一级标题
     toc: {level: [1,2,3]},
-
+    math: true,
     // 使用 `!!code` 防止转换
     codeTransformers: [
       {
