@@ -186,6 +186,7 @@ export default defineConfig({
           
           { text: 'BF算法', link: '/BF算法' },
           { text: 'KMP算法', link: '/KMP算法' },
+          
         ],
       },
       {
@@ -195,6 +196,22 @@ export default defineConfig({
         items: [
           
           { text: 'BF算法', link: '/BF算法' },
+        ],
+      },
+      {
+        //分组标题1
+        text: 'LeetCode',
+        collapsed: false,
+        items: [
+        ],
+      },
+      {
+        //分组标题1
+        text: '提示词',
+        collapsed: false,
+        items: [
+          { text: '格式转换类', link: '/格式转换类提示词' },
+          { text: '开发类', link: '/开发类提示词' },
         ],
       },
       // {
