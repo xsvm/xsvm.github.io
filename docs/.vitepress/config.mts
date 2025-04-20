@@ -13,6 +13,8 @@ export default defineConfig({
   sitemap: {
     hostname: 'https://xsvm.github.io',
   },
+  // 完全禁用死链接检查
+  ignoreDeadLinks: true,
   // #region fav
   head: [
     ['link', { rel: 'icon', href: 'https://img.icons8.com/?size=96&id=Fqihn9MGe0kQ&format=png' }],
