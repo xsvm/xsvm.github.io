@@ -188,7 +188,17 @@ export default defineConfig({
           
           { text: 'BF算法', link: '/BF算法' },
           { text: 'KMP算法', link: '/KMP算法' },
-          
+          {
+            //子标题
+            text: '数学',
+            collapsed: true,
+            items: [
+              
+              { text: 'GCD', link: '/GCD' },
+              { text: 'LCM', link: '/LCM' },
+              
+            ],
+          },
         ],
       },
       {
@@ -215,6 +225,7 @@ export default defineConfig({
           { text: '格式转换类', link: '/格式转换类提示词' },
           { text: '开发类', link: '/开发类提示词' },
           { text: 'Agent提示词', link: '/Agent提示词' },
+          { text: '创作类提示词', link: '/创作类提示词' },
         ],
       },
       // {
