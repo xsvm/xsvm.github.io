@@ -121,4 +121,5 @@ int kmp(const string& T, const string& P) {
     }
 }
 ```
-![](https://gitee.com/LLLZZYYY/pic-bed/raw/master/image/4-模式匹配.png)
+
+![比较](/4-模式匹配.png)

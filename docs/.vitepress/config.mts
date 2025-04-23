@@ -214,6 +214,7 @@ export default defineConfig({
         items: [
           { text: '格式转换类', link: '/格式转换类提示词' },
           { text: '开发类', link: '/开发类提示词' },
+          { text: 'Agent提示词', link: '/Agent提示词' },
         ],
       },
       // {
