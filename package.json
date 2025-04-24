@@ -3,6 +3,7 @@
     "@mdit-vue/shared": "^2.1.3",
     "@types/animejs": "^3.1.13",
     "@types/dom-view-transitions": "^1.0.6",
+    "@vue-pdf-viewer/viewer": "^2.4.1",
     "animejs": "^3.2.2",
     "busuanzi.pure.js": "^1.0.3",
     "canvas-confetti": "^1.9.3",
@@ -12,6 +13,7 @@
     "medium-zoom": "^1.1.0",
     "mermaid": "^11.4.1",
     "nprogress-v2": "^1.1.10",
+    "pdfjs-dist": "^5.1.91",
     "sass": "^1.85.1",
     "vitepress": "^1.6.3",
     "vitepress-plugin-comment-with-giscus": "^1.1.15",
@@ -26,5 +28,9 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
+  },
+  "dependencies": {
+    "vue-pdf-embed": "^2.1.2",
+    "vue3-pdf-app": "1.0.3"
   }
 }

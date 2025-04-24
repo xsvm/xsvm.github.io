@@ -191,12 +191,10 @@ export default defineConfig({
           {
             //子标题
             text: '数学',
-            collapsed: true,
+            collapsed: false,
             items: [
-              
-              { text: 'GCD', link: '/GCD' },
-              { text: 'LCM', link: '/LCM' },
-              
+              { text: '最大公约数（GCD）', link: '/最大公约数（GCD）' },
+              { text: '最小公倍数（LCM）', link: '/最小公倍数（LCM）' },
             ],
           },
         ],

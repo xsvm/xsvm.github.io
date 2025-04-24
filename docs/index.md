@@ -7,7 +7,7 @@ titleTemplate: Welcome!
 hero:
   name: Xsvm's Blog
   text: "Welcome!"
-  tagline: 你好呀
+  tagline: 学无止境，积少成多。
   image:
     src: /首页.png
     alt: VitePress
@@ -15,7 +15,7 @@ hero:
     # - theme: brand
     - theme: alt
       text: 开始
-      link: /施工中
+      link: /首页
     - theme: brand
       text: 算法
       link: /BF算法

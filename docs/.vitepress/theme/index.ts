@@ -54,7 +54,6 @@ export default {
     app.component('fluidborder' , fluidborder) //流体边框仅用于演示
     app.component('MouseClick', MouseClick) //鼠标跟随组件
     app.component('MouseFollower', MouseFollower) //鼠标跟随组件
-
     // 不蒜子
     if (inBrowser) {
       NProgress.configure({ showSpinner: false })
