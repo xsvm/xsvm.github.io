@@ -204,8 +204,8 @@ export default defineConfig({
         text: '数据结构',
         collapsed: false,
         items: [
-          
-          { text: 'BF算法', link: '/BF算法' },
+          { text: '大纲', link: '/数据结构大纲' },
+          { text: '链表', link: '/链表' },
         ],
       },
       {

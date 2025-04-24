@@ -19,6 +19,12 @@ hero:
     - theme: brand
       text: 算法
       link: /BF算法
+    - theme: brand
+      text: 数据结构
+      link: /数据结构大纲
+    - theme: brand
+      text: AI提示词
+      link: /格式转换类提示词
     # - theme: alt
     #   text: GitHub
     #   link: https://github.com/Yiov/vitepress-doc
@@ -43,6 +49,9 @@ features:
   - icon: 🛠️
     title: 技术栈学习
     details: 前后端，数据分析，数据库，数学建模
+  - icon: 💡
+    title: AI提示词
+    details: 开发，设计，文案，翻译，代码
 ---
 
 <HomeUnderline />
