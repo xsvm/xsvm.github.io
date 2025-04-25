@@ -217,6 +217,30 @@ export default defineConfig({
       },
       {
         //分组标题1
+        text: 'Linus',
+        collapsed: false,
+        items: [
+          
+        ],
+      },
+      {
+        //分组标题1
+        text: '数据库',
+        collapsed: false,
+        items: [
+          { text: 'SQL入门', link: '/SQL入门' },
+        ],
+      },
+      {
+        //分组标题1
+        text: 'Git',
+        collapsed: false,
+        items: [
+          
+        ],
+      },
+      {
+        //分组标题1
         text: '提示词',
         collapsed: false,
         items: [
