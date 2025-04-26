@@ -1,5 +1,5 @@
 # SQL入门
-[练习网站](https://sqlzoo.net/)
+[SQL练习网站：sqlzoo.net](https://sqlzoo.net/)
 ## 目录
 
 ### 0. SELECT基础
@@ -791,7 +791,7 @@ CREATE TABLE students (
     FOREIGN KEY (class_id) REFERENCES classes(class_id)
 );
 ```
-
+- 外键（Foreign key）：外键是一个字段，它在一个表中引用另一个表中的主键。它用于建立两个表之间的联系。
 示例数据：
 
 **classes表：**
@@ -1067,3 +1067,10 @@ ORDER BY s.score DESC;
 2. 使用适当的索引可以提高查询效率
 3. 避免不必要的表连接
 4. 根据实际需求选择连接类型
+
+|连接类型	|语法	|返回结果	|使用场景|
+|----------|-----------|----------|----------|
+|INNER JOIN	|SELECT...FROM A INNER JOIN B ON...	|只返回匹配行	|查找有关联的记录
+|LEFT JOIN	|SELECT...FROM A LEFT JOIN B ON...	|返回左表所有行	|包含主表所有记录
+|RIGHT JOIN	|SELECT...FROM A RIGHT JOIN B ON...	|返回右表所有行	|包含副表所有记录
+|FULL JOIN	|SELECT...FROM A FULL JOIN B ON...	|返回两表所有行	|需要完整数据时

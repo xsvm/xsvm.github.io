@@ -236,7 +236,7 @@ export default defineConfig({
         text: 'Git',
         collapsed: false,
         items: [
-          
+          { text: 'Git 版本控制入门指南', link: '/git' },
         ],
       },
       {
