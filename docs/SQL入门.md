@@ -1,5 +1,5 @@
 # SQL入门
-
+[练习网站](https://sqlzoo.net/)
 ## 目录
 
 ### 0. SELECT基础
@@ -684,3 +684,386 @@ FROM students;
   - 时间计算和比较
   - 日期格式化和展示
   - 时间区间处理
+
+## 2. 连接查询（JOIN）
+
+### 2.0 连接查询函数说明
+
+SQL中的连接查询函数主要包括以下几种：
+
+#### 2.0.1 INNER JOIN
+语法：
+```sql
+SELECT columns
+FROM table1
+INNER JOIN table2
+ON table1.column = table2.column;
+```
+
+参数说明：
+- `table1`, `table2`：要连接的两个表
+- `ON`：指定连接条件，通常是两个表中相关的列
+
+特点：
+- 只返回两个表中都匹配的记录
+- 如果某条记录在任一表中没有匹配，则不会出现在结果中
+- 最常用的连接类型，适合查找确定存在的关联数据
+
+#### 2.0.2 LEFT JOIN（LEFT OUTER JOIN）
+语法：
+```sql
+SELECT columns
+FROM table1
+LEFT JOIN table2
+ON table1.column = table2.column;
+```
+
+参数说明：
+- `table1`：左表，其所有记录都会出现在结果中
+- `table2`：右表，只有匹配的记录会出现
+- `ON`：指定连接条件
+
+特点：
+- 返回左表的所有记录
+- 对于左表中没有匹配的记录，右表的字段显示为NULL
+- 适合需要保留主表所有数据的场景
+
+#### 2.0.3 RIGHT JOIN（RIGHT OUTER JOIN）
+语法：
+```sql
+SELECT columns
+FROM table1
+RIGHT JOIN table2
+ON table1.column = table2.column;
+```
+
+参数说明：
+- `table1`：左表，只有匹配的记录会出现
+- `table2`：右表，其所有记录都会出现在结果中
+- `ON`：指定连接条件
+
+特点：
+- 返回右表的所有记录
+- 对于右表中没有匹配的记录，左表的字段显示为NULL
+- 功能与LEFT JOIN相反，使用较少
+
+#### 2.0.4 UNION 和 UNION ALL
+语法：
+```sql
+SELECT columns FROM table1
+UNION [ALL]
+SELECT columns FROM table2;
+```
+
+参数说明：
+- `UNION`：合并两个查询结果，自动去除重复行
+- `UNION ALL`：合并两个查询结果，保留重复行
+
+特点：
+- 两个SELECT语句的列数必须相同
+- 对应列的数据类型必须兼容
+- UNION自动去重，UNION ALL保留重复行但性能更好
+
+#### 2.0.5 性能优化建议
+1. 连接条件的列应建立索引
+2. 小表放在左边（驱动表），大表放在右边
+3. 避免使用`SELECT *`，只查询需要的列
+4. 适当使用WHERE子句提前过滤数据
+5. 必要时使用EXPLAIN分析查询计划
+
+### 2.1 连接查询概述
+
+在实际的数据库应用中，我们经常需要从多个表中获取数据。连接查询（JOIN）是SQL中用于组合多个表中的记录的重要操作。为了更好地理解连接查询，让我们先创建两个相关的表：
+
+```sql
+CREATE TABLE classes (
+    class_id INT PRIMARY KEY,
+    class_name VARCHAR(50),
+    teacher_name VARCHAR(50),
+    total_students INT
+);
+
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    class_id INT,
+    score DECIMAL(5,2),
+    FOREIGN KEY (class_id) REFERENCES classes(class_id)
+);
+```
+
+示例数据：
+
+**classes表：**
+
+| class_id | class_name  | teacher_name | total_students |
+|----------|-------------|--------------|----------------|
+| 1        | 计算机三班  | 张老师       | 35             |
+| 2        | 数学二班    | 李老师       | 40             |
+| 3        | 英语一班    | 王老师       | 38             |
+| 4        | 物理四班    | 赵老师       | 32             |
+
+**students表：**
+
+| student_id | name   | class_id | score |
+|------------|--------|-----------|-------|
+| 1          | 张三   | 1         | 85.5  |
+| 2          | 李四   | 1         | 92.5  |
+| 3          | 王五   | 2         | 78.5  |
+| 4          | 赵六   | 2         | 95.5  |
+| 5          | 钱七   | 3         | 88.5  |
+| 6          | 孙八   | NULL      | 86.5  |
+
+### 2.2 内连接（INNER JOIN）
+
+内连接是最基本的连接类型，它只返回两个表中匹配的行。使用INNER JOIN关键字实现：
+
+```sql
+SELECT 
+    s.name as 学生姓名,
+    c.class_name as 班级名称,
+    c.teacher_name as 教师姓名,
+    s.score as 分数
+FROM students s
+INNER JOIN classes c ON s.class_id = c.class_id;
+```
+
+这个查询：
+- 使用了表别名（s和c）来简化书写
+- 通过class_id字段关联两个表
+- 只返回能够匹配的记录
+
+**查询结果：**
+
+| 学生姓名 | 班级名称  | 教师姓名 | 分数 |
+|----------|-----------|----------|-------|
+| 张三     | 计算机三班| 张老师   | 85.5  |
+| 李四     | 计算机三班| 张老师   | 92.5  |
+| 王五     | 数学二班  | 李老师   | 78.5  |
+| 赵六     | 数学二班  | 李老师   | 95.5  |
+| 钱七     | 英语一班  | 王老师   | 88.5  |
+
+注意：
+- 孙八的记录没有出现在结果中，因为他的class_id为NULL
+- 物理四班没有出现在结果中，因为没有学生属于这个班级
+
+内连接的特点：
+1. 只返回两个表中都存在的匹配记录
+2. 不返回任何未匹配的记录
+3. 最常用的连接类型，适合查找两个表之间的关联数据
+
+### 2.3 左外连接（LEFT JOIN）
+
+左外连接返回左表的所有记录，即使右表中没有匹配的记录。使用LEFT JOIN关键字：
+
+```sql
+SELECT 
+    s.name as 学生姓名,
+    c.class_name as 班级名称,
+    c.teacher_name as 教师姓名,
+    s.score as 分数
+FROM students s
+LEFT JOIN classes c ON s.class_id = c.class_id;
+```
+
+这个查询将：
+- 返回所有学生记录
+- 对于没有班级的学生，相关字段显示为NULL
+
+**查询结果：**
+
+| 学生姓名 | 班级名称  | 教师姓名 | 分数 |
+|----------|-----------|----------|-------|
+| 张三     | 计算机三班| 张老师   | 85.5  |
+| 李四     | 计算机三班| 张老师   | 92.5  |
+| 王五     | 数学二班  | 李老师   | 78.5  |
+| 赵六     | 数学二班  | 李老师   | 95.5  |
+| 钱七     | 英语一班  | 王老师   | 88.5  |
+| 孙八     | NULL      | NULL     | 86.5  |
+
+左外连接的特点：
+1. 返回左表的所有记录
+2. 如果右表没有匹配的记录，则显示为NULL
+3. 适合查找某表的所有记录及其关联信息
+
+### 2.4 右外连接（RIGHT JOIN）
+
+右外连接与左外连接相反，返回右表的所有记录。使用RIGHT JOIN关键字：
+
+```sql
+SELECT 
+    s.name as 学生姓名,
+    c.class_name as 班级名称,
+    c.teacher_name as 教师姓名,
+    s.score as 分数
+FROM students s
+RIGHT JOIN classes c ON s.class_id = c.class_id;
+```
+
+这个查询将：
+- 返回所有班级记录
+- 对于没有学生的班级，学生相关字段显示为NULL
+
+**查询结果：**
+
+| 学生姓名 | 班级名称  | 教师姓名 | 分数 |
+|----------|-----------|----------|-------|
+| 张三     | 计算机三班| 张老师   | 85.5  |
+| 李四     | 计算机三班| 张老师   | 92.5  |
+| 王五     | 数学二班  | 李老师   | 78.5  |
+| 赵六     | 数学二班  | 李老师   | 95.5  |
+| 钱七     | 英语一班  | 王老师   | 88.5  |
+| NULL     | 物理四班  | 赵老师   | NULL  |
+
+右外连接的特点：
+1. 返回右表的所有记录
+2. 如果左表没有匹配的记录，则显示为NULL
+3. 适合查找某表的所有记录及其关联信息
+
+### 2.5 全外连接（FULL JOIN）
+
+全外连接返回左表和右表中的所有记录。注意：MySQL不直接支持FULL JOIN，但可以通过UNION组合LEFT JOIN和RIGHT JOIN来实现：
+
+```sql
+SELECT 
+    s.name as 学生姓名,
+    c.class_name as 班级名称,
+    c.teacher_name as 教师姓名,
+    s.score as 分数
+FROM students s
+LEFT JOIN classes c ON s.class_id = c.class_id
+UNION
+SELECT 
+    s.name as 学生姓名,
+    c.class_name as 班级名称,
+    c.teacher_name as 教师姓名,
+    s.score as 分数
+FROM students s
+RIGHT JOIN classes c ON s.class_id = c.class_id
+WHERE s.student_id IS NULL;
+```
+
+这个查询将：
+- 返回所有学生和所有班级的记录
+- 对于没有匹配的记录，相关字段显示为NULL
+
+**查询结果：**
+
+| 学生姓名 | 班级名称  | 教师姓名 | 分数 |
+|----------|-----------|----------|-------|
+| 张三     | 计算机三班| 张老师   | 85.5  |
+| 李四     | 计算机三班| 张老师   | 92.5  |
+| 王五     | 数学二班  | 李老师   | 78.5  |
+| 赵六     | 数学二班  | 李老师   | 95.5  |
+| 钱七     | 英语一班  | 王老师   | 88.5  |
+| 孙八     | NULL      | NULL     | 86.5  |
+| NULL     | 物理四班  | 赵老师   | NULL  |
+
+全外连接的特点：
+1. 返回两个表的所有记录
+2. 对于没有匹配的记录，相关字段显示为NULL
+3. 适合需要查看两个表所有数据的情况
+
+### 2.6 自连接（SELF JOIN）
+
+自连接是指表与自身进行连接，通常用于处理层级关系数据。让我们创建一个员工表来演示：
+
+```sql
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    manager_id INT,
+    salary DECIMAL(10,2)
+);
+```
+
+示例数据：
+
+| emp_id | name   | manager_id | salary  |
+|--------|--------|------------|----------|
+| 1      | 张总   | NULL       | 20000.00|
+| 2      | 李经理 | 1          | 15000.00|
+| 3      | 王经理 | 1          | 15000.00|
+| 4      | 赵主管 | 2          | 10000.00|
+| 5      | 钱主管 | 2          | 10000.00|
+| 6      | 孙员工 | 4          | 8000.00 |
+
+查找每个员工及其直接主管：
+
+```sql
+SELECT 
+    e1.name as 员工姓名,
+    e2.name as 主管姓名,
+    e1.salary as 员工薪资
+FROM employees e1
+LEFT JOIN employees e2 ON e1.manager_id = e2.emp_id;
+```
+
+**查询结果：**
+
+| 员工姓名 | 主管姓名 | 员工薪资 |
+|----------|----------|----------|
+| 张总     | NULL     | 20000.00|
+| 李经理   | 张总     | 15000.00|
+| 王经理   | 张总     | 15000.00|
+| 赵主管   | 李经理   | 10000.00|
+| 钱主管   | 李经理   | 10000.00|
+| 孙员工   | 赵主管   | 8000.00 |
+
+自连接的应用场景：
+1. 组织架构查询
+2. 地区层级关系
+3. 商品分类体系
+4. 评论回复关系
+
+### 2.7 多表连接
+
+在实际应用中，我们经常需要同时连接多个表。例如，我们再创建一个课程表：
+
+```sql
+CREATE TABLE courses (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(50),
+    teacher_id INT,
+    class_id INT
+);
+```
+
+示例数据：
+
+| course_id | course_name | teacher_id | class_id |
+|-----------|-------------|------------|----------|
+| 1         | Java基础    | 1          | 1        |
+| 2         | 数据库      | 2          | 1        |
+| 3         | 高等数学    | 3          | 2        |
+| 4         | 英语写作    | 4          | 3        |
+
+现在我们可以查询学生、班级和课程的综合信息：
+
+```sql
+SELECT 
+    s.name as 学生姓名,
+    c.class_name as 班级名称,
+    co.course_name as 课程名称,
+    s.score as 学生成绩
+FROM students s
+INNER JOIN classes c ON s.class_id = c.class_id
+INNER JOIN courses co ON c.class_id = co.class_id
+ORDER BY s.score DESC;
+```
+
+**查询结果：**
+
+| 学生姓名 | 班级名称  | 课程名称 | 学生成绩 |
+|----------|-----------|----------|----------|
+| 李四     | 计算机三班| Java基础 | 92.5     |
+| 李四     | 计算机三班| 数据库   | 92.5     |
+| 张三     | 计算机三班| Java基础 | 85.5     |
+| 张三     | 计算机三班| 数据库   | 85.5     |
+| 王五     | 数学二班  | 高等数学 | 78.5     |
+
+多表连接的注意事项：
+1. 连接顺序会影响查询性能
+2. 使用适当的索引可以提高查询效率
+3. 避免不必要的表连接
+4. 根据实际需求选择连接类型
