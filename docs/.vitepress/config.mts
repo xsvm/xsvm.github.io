@@ -237,6 +237,15 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: 'Git 版本控制入门指南', link: '/git' },
+          { text: 'Git的4个阶段撤销更改', link: '/Git的4个阶段撤销更改' },
+        ],
+      },
+      {
+        //分组标题1
+        text: '开发项目',
+        collapsed: false,
+        items: [
+          { text: '记单词app项目开发记录', link: '/记单词app项目开发记录' },
         ],
       },
       {

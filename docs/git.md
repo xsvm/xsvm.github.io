@@ -94,11 +94,6 @@ git status
 git diff
 ```
 
-::: tip 记忆技巧
-- `git status` 就像照镜子，让你看到当前工作区的"容貌"
-- `git diff` 则像显微镜，让你看清每一行代码的变化
-:::
-
 ## 5. 分支管理
 
 分支是Git中最强大的功能之一，它允许我们在不影响主线开发的情况下进行新功能开发或问题修复。
@@ -160,7 +155,7 @@ git pull <remote-name> <branch-name>
 git push <remote-name> <branch-name>
 ```
 
-::: warning 最佳实践
+::: warning 注意
 - 推送前先拉取：避免冲突
 - 定期同步：保持本地代码与远程仓库的同步
 - 谨慎使用force push：可能会覆盖他人的提交
@@ -185,7 +180,7 @@ git restore --staged <file-name>
 git reset --hard <commit-id>
 ```
 
-::: danger 注意
+::: danger 警告
 - `git reset --hard` 会丢失工作区的所有修改，使用前请确保已提交或备份重要修改
 - 如果已经推送到远程仓库，回退后需要使用 `git push -f` 强制推送（需要特别谨慎）
 :::
