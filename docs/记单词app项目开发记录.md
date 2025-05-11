@@ -28,7 +28,7 @@ npx degit dcloudio/uni-preset-vue#vite .
 - 从 DCloud 官方仓库下载最新的 uni-app Vue 3 项目模板
 - 使用 Vite 作为构建工具的版本
 - 将模板文件直接解压到当前目录
-![1](.\记单词app项目图片\项目结构1.png)
+![1](/记单词app项目图片/项目结构1.png)
 
 2. 安装uni-app项目依赖
 ```
@@ -39,7 +39,7 @@ npm install
 通过 [Spring Initializr](https://start.spring.io/) 在线生成项目，选择依赖，生成项目，下载压缩包。
 
 - 选择如图：
-![2](.\记单词app项目图片\SpringBoot创建.png)
+![2](/记单词app项目图片/SpringBoot创建.png)
 
 - Spring Web (用于构建RESTful API)
 - MySQL Driver (MySQL数据库驱动)
@@ -49,7 +49,7 @@ npm install
 - Validation (数据验证)
 
 添加压缩包的内容到项目中。
-![3](.\记单词app项目图片\添加后端后的项目结构.png)
+![3](/记单词app项目图片/添加后端后的项目结构.png)
 
 4. 配置mysql数据库
 
@@ -204,4 +204,4 @@ CREATE TABLE user_learning_records (
 SHOW DATABASES;
 ```
 - 如下
-![4](.\记单词app项目图片\判断mysql是否创建成功.png)
+![4](/记单词app项目图片/判断mysql是否创建成功.png)
