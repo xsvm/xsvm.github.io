@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF--8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>位运算</title>
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Custom Scrollbar (optional, for a more polished look) */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #555;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #888;
+        }
+
+        /* Fade-in animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom styles for code blocks */
+        pre {
+            position: relative;
+            background-color: #f3f4f6; /* Tailwind gray-100 */
+            border-radius: 0.375rem; /* Tailwind rounded-md */
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.875rem; /* Tailwind text-sm */
+            line-height: 1.25rem; /* Tailwind leading-5 */
+            margin-bottom: 1rem;
+        }
+        .dark pre {
+            background-color: #374151; /* Tailwind gray-700 */
+        }
+        pre code {
+            color: #1f2937; /* Tailwind gray-800 */
+        }
+        .dark pre code {
+            color: #d1d5db; /* Tailwind gray-300 */
+        }
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: #d1d5db; /* Tailwind gray-300 */
+            color: #1f2937; /* Tailwind gray-800 */
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.75rem;
+            opacity: 0.7;
+            transition: opacity 0.2s ease-in-out;
+        }
+        .dark .copy-button {
+            background-color: #4b5563; /* Tailwind gray-600 */
+            color: #f3f4f6; /* Tailwind gray-100 */
+        }
+        pre:hover .copy-button {
+            opacity: 1;
+        }
+        .copy-button:hover {
+            background-color: #9ca3af; /* Tailwind gray-400 */
+        }
+        .dark .copy-button:hover {
+            background-color: #6b7280; /* Tailwind gray-500 */
+        }
+        .tooltip {
+            position: absolute;
+            background-color: #1f2937; /* Tailwind gray-800 */
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-0.25rem);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+        .dark .tooltip {
+             background-color: #f3f4f6; /* Tailwind gray-100 */
+             color: #1f2937; /* Tailwind gray-800 */
+        }
+        .copy-button:hover .tooltip {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans antialiased transition-colors duration-300">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-cogs text-2xl text-sky-500 mr-3"></i>
+                    <h1 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">位运算可视化教程</h1>
+                </div>
+                <button id="darkModeToggle" aria-label="切换深色模式" class="p-2 rounded-md text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors transform hover:scale-110">
+                    <i class="fas fa-sun text-lg"></i>
+                    <i class="fas fa-moon text-lg hidden"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        <!-- Introduction -->
+        <section id="intro" class="mb-12 fade-in-section">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 pb-2 border-b border-slate-300 dark:border-slate-700 text-sky-600 dark:text-sky-400 flex items-center">
+                <i class="fas fa-info-circle mr-3"></i>简介
+            </h2>
+            <p class="text-base sm:text-lg leading-relaxed mb-4">
+                位运算就是对二进制位进行操作。由于计算机内部数据都是以二进制形式存储的，位运算的速度通常非常快，并且在某些情况下能够巧妙地解决问题，节省代码量和内存空间。
+                本教程将介绍常见的位运算符及其应用技巧。
+            </p>
+            <div class="p-4 bg-sky-100 dark:bg-sky-900/50 border-l-4 border-sky-500 text-sky-700 dark:text-sky-300 rounded-md">
+                <p><i class="fas fa-lightbulb mr-2"></i>在算法竞赛中，熟练掌握位运算是优化时间和空间复杂度的关键技能之一。</p>
+            </div>
+        </section>
+
+        <!-- Basic Operators -->
+        <section id="operators" class="mb-12 fade-in-section">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-6 pb-2 border-b border-slate-300 dark:border-slate-700 text-sky-600 dark:text-sky-400 flex items-center">
+                <i class="fas fa-microchip mr-3"></i>基本位运算符
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- AND -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h3 class="text-xl font-semibold mb-3 text-sky-700 dark:text-sky-300 flex items-center"><i class="fas fa-code-branch transform rotate-90 mr-2"></i>按位与 (AND) - <code>&</code></h3>
+                    <p class="mb-3 text-sm sm:text-base">对两个操作数的每一个对应位执行逻辑与操作。只有当两个位都为1时，结果位才为1。</p>
+                    <p class="mb-3 text-sm sm:text-base"><strong>用途：</strong>取一个数的某些位、判断奇偶性 (<code>x & 1</code>)。</p>
+                    <div class="interactive-bitwise" data-operator="&">
+                        <div class="flex space-x-2 mb-2">
+                            <input type="number" placeholder="数1 (十进制)" class="num1 p-2 border rounded-md w-1/2 bg-slate-100 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none">
+                            <input type="number" placeholder="数2 (十进制)" class="num2 p-2 border rounded-md w-1/2 bg-slate-100 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none">
+                        </div>
+                        <div class="result-area text-sm p-3 bg-slate-100 dark:bg-slate-700 rounded-md min-h-[60px]">点击输入框计算</div>
+                    </div>
+                </div>
+
+                <!-- OR -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h3 class="text-xl font-semibold mb-3 text-sky-700 dark:text-sky-300 flex items-center"><i class="fas fa-grip-lines-vertical mr-2"></i>按位或 (OR) - <code>|</code></h3>
+                    <p class="mb-3 text-sm sm:text-base">对两个操作数的每一个对应位执行逻辑或操作。只要两个位中有一个为1，结果位就为1。</p>
+                    <p class="mb-3 text-sm sm:text-base"><strong>用途：</strong>将一个数的某些位置1。</p>
+                     <div class="interactive-bitwise" data-operator="|">
+                        <div class="flex space-x-2 mb-2">
+                            <input type="number" placeholder="数1 (十进制)" class="num1 p-2 border rounded-md w-1/2 bg-slate-100 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none">
+                            <input type="number" placeholder="数2 (十进制)" class="num2 p-2 border rounded-md w-1/2 bg-slate-100 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none">
+                        </div>
+                        <div class="result-area text-sm p-3 bg-slate-100 dark:bg-slate-700 rounded-md min-h-[60px]">点击输入框计算</div>
+                    </div>
+                </div>
+
+                <!-- XOR -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h3 class="text-xl font-semibold mb-3 text-sky-700 dark:text-sky-300 flex items-center"><i class="fas fa-plus-circle mr-2"></i>按位异或 (XOR) - <code>^</code></h3>
+                    <p class="mb-3 text-sm sm:text-base">对两个操作数的每一个对应位执行逻辑异或操作。当两个位不同时，结果位为1；相同时为0。</p>
+                    <p class="mb-3 text-sm sm:text-base"><strong>特性：</strong><code>a ^ a = 0</code>, <code>a ^ 0 = a</code>, 满足交换律和结合律。</p>
+                    <p class="mb-3 text-sm sm:text-base"><strong>用途：</strong>翻转某些位、不使用临时变量交换两个数、查找只出现一次的数字。</p>
+                     <div class="interactive-bitwise" data-operator="^">
+                        <div class="flex space-x-2 mb-2">
+                            <input type="number" placeholder="数1 (十进制)" class="num1 p-2 border rounded-md w-1/2 bg-slate-100 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none">
+                            <input type="number" placeholder="数2 (十进制)" class="num2 p-2 border rounded-md w-1/2 bg-slate-100 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none">
+                        </div>
+                        <div class="result-area text-sm p-3 bg-slate-100 dark:bg-slate-700 rounded-md min-h-[60px]">点击输入框计算</div>
+                    </div>
+                </div>
+
+                <!-- NOT -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h3 class="text-xl font-semibold mb-3 text-sky-700 dark:text-sky-300 flex items-center"><i class="fas fa-exclamation-circle mr-2"></i>按位非 (NOT) - <code>~</code></h3>
+                    <p class="mb-3 text-sm sm:text-base">对操作数的每一位取反（0变1，1变0）。这是一个单目运算符。</p>
+                    <p class="mb-3 text-sm sm:text-base"><strong>注意：</strong>在C++中，<code>~x</code> 结果与 <code>-x-1</code> 等价 (对于有符号整数，基于补码表示)。</p>
+                    <div class="interactive-bitwise-unary" data-operator="~">
+                        <input type="number" placeholder="输入数字 (十进制)" class="num1 p-2 border rounded-md w-full mb-2 bg-slate-100 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none">
+                        <div class="result-area text-sm p-3 bg-slate-100 dark:bg-slate-700 rounded-md min-h-[60px]">点击输入框计算</div>
+                    </div>
+                </div>
+
+                <!-- Left Shift -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h3 class="text-xl font-semibold mb-3 text-sky-700 dark:text-sky-300 flex items-center"><i class="fas fa-angle-double-left mr-2"></i>左移 (Left Shift) - <code>&lt;&lt;</code></h3>
+                    <p class="mb-3 text-sm sm:text-base">将操作数的所有位向左移动指定的位数。右边空出的位用0填充。</p>
+                    <p class="mb-3 text-sm sm:text-base"><code>x << k</code> 相当于 <code>x * 2<sup>k</sup></code>。</p>
+                    <div class="interactive-bitwise" data-operator="<<">
+                        <div class="flex space-x-2 mb-2">
+                            <input type="number" placeholder="数 (十进制)" class="num1 p-2 border rounded-md w-2/3 bg-slate-100 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none">
+                            <input type="number" placeholder="位数" class="num2 p-2 border rounded-md w-1/3 bg-slate-100 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none" min="0" max="31">
+                        </div>
+                        <div class="result-area text-sm p-3 bg-slate-100 dark:bg-slate-700 rounded-md min-h-[60px]">点击输入框计算</div>
+                    </div>
+                </div>
+
+                <!-- Right Shift -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h3 class="text-xl font-semibold mb-3 text-sky-700 dark:text-sky-300 flex items-center"><i class="fas fa-angle-double-right mr-2"></i>右移 (Right Shift) - <code>&gt;&gt;</code></h3>
+                    <p class="mb-3 text-sm sm:text-base">将操作数的所有位向右移动指定的位数。</p>
+                    <p class="mb-3 text-sm sm:text-base">对于无符号数，左边空出的位用0填充（逻辑右移）。对于有符号数，行为取决于实现：C++中通常是算术右移，即用符号位填充。</p>
+                    <p class="mb-3 text-sm sm:text-base"><code>x >> k</code> 相当于 <code>x / 2<sup>k</sup></code> (向下取整)。</p>
+                    <div class="interactive-bitwise" data-operator=">>">
+                         <div class="flex space-x-2 mb-2">
+                            <input type="number" placeholder="数 (十进制)" class="num1 p-2 border rounded-md w-2/3 bg-slate-100 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none">
+                            <input type="number" placeholder="位数" class="num2 p-2 border rounded-md w-1/3 bg-slate-100 dark:bg-slate-700 focus:ring-2 focus:ring-sky-500 outline-none" min="0" max="31">
+                        </div>
+                        <div class="result-area text-sm p-3 bg-slate-100 dark:bg-slate-700 rounded-md min-h-[60px]">点击输入框计算</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Techniques -->
+        <section id="techniques" class="mb-12 fade-in-section">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-6 pb-2 border-b border-slate-300 dark:border-slate-700 text-sky-600 dark:text-sky-400 flex items-center">
+                <i class="fas fa-puzzle-piece mr-3"></i>常用位运算技巧
+            </h2>
+            <div class="space-y-6">
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h4 class="text-lg font-medium mb-2 text-sky-700 dark:text-sky-300">1. <code>lowbit(x)</code>：取 x 二进制表示中最低位的1所对应的值</h4>
+                    <p class="mb-2 text-sm sm:text-base">返回 x 的二进制表示中，值为1的最低位所对应的数。例如 <code>lowbit(6)</code> (二进制 <code>110</code>) 返回 <code>2</code> (二进制 <code>10</code>)。</p>
+                    <pre><code class="language-cpp">int lowbit(int x) {
+    return x & -x; // 或者 x & (~x + 1)
+}</code></pre>
+                    <p class="text-sm sm:text-base"><strong>应用：</strong>树状数组 (Fenwick Tree)。</p>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h4 class="text-lg font-medium mb-2 text-sky-700 dark:text-sky-300">2. 判断一个数 x 是否是 2 的正整数次幂</h4>
+                    <pre><code class="language-cpp">bool isPowerOfTwo(int x) {
+    return x > 0 && (x & (x - 1)) == 0;
+}</code></pre>
+                    <p class="text-sm sm:text-base"><strong>解释：</strong>如果 x 是2的幂，其二进制表示中只有一个1。<code>x-1</code> 会将这个1变为0，并将它之后的所有0变为1。因此 <code>x & (x-1)</code> 结果为0。</p>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h4 class="text-lg font-medium mb-2 text-sky-700 dark:text-sky-300">3. 获取整数 x 的第 k 位 (从0开始计数)</h4>
+                    <pre><code class="language-cpp">int getKthBit(int x, int k) {
+    return (x >> k) & 1;
+}</code></pre>
+                </div>
+
+                 <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h4 class="text-lg font-medium mb-2 text-sky-700 dark:text-sky-300">4. 将整数 x 的第 k 位设置为 1</h4>
+                    <pre><code class="language-cpp">int setKthBitToOne(int x, int k) {
+    return x | (1 << k);
+}</code></pre>
+                </div>
+
+                 <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h4 class="text-lg font-medium mb-2 text-sky-700 dark:text-sky-300">5. 将整数 x 的第 k 位设置为 0</h4>
+                    <pre><code class="language-cpp">int setKthBitToZero(int x, int k) {
+    return x & (~(1 << k));
+}</code></pre>
+                </div>
+
+                 <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h4 class="text-lg font-medium mb-2 text-sky-700 dark:text-sky-300">6. 翻转整数 x 的第 k 位</h4>
+                    <pre><code class="language-cpp">int toggleKthBit(int x, int k) {
+    return x ^ (1 << k);
+}</code></pre>
+                </div>
+                 <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h4 class="text-lg font-medium mb-2 text-sky-700 dark:text-sky-300">7. 不使用临时变量交换两个数 (XOR Swap)</h4>
+                    <pre><code class="language-cpp">void swap(int &a, int &b) {
+    if (a == b) return; // 重要：避免a、b指向同一地址时出错
+    a = a ^ b;
+    b = a ^ b; // b = (a_orig ^ b_orig) ^ b_orig = a_orig
+    a = a ^ b; // a = (a_orig ^ b_orig) ^ a_orig = b_orig
+}</code></pre>
+                    <p class="text-sm sm:text-base"><strong>注意：</strong>虽然巧妙，但在现代编译器优化下，其性能优势可能不明显，且可读性较差。主要用于理解XOR特性。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Built-in Functions (GCC/Clang) -->
+        <section id="builtins" class="mb-12 fade-in-section">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-6 pb-2 border-b border-slate-300 dark:border-slate-700 text-sky-600 dark:text-sky-400 flex items-center">
+                <i class="fas fa-cogs mr-3"></i>内建函数 (GCC/Clang)
+            </h2>
+            <p class="mb-4 text-base sm:text-lg">GCC 和 Clang 等编译器提供了一些高效的内建函数用于位运算，它们通常直接映射到硬件指令，速度非常快。</p>
+            <div class="space-y-6">
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h4 class="text-lg font-medium mb-2 text-sky-700 dark:text-sky-300"><code>__builtin_popcount(x)</code> / <code>__builtin_popcountll(x)</code></h4>
+                    <p class="mb-2 text-sm sm:text-base">返回 x 的二进制表示中 1 的个数。<code>ll</code> 版本用于 <code>long long</code>。</p>
+                    <pre><code class="language-cpp">// 例: 计算 13 (二进制 1101) 中 1 的个数
+int count = __builtin_popcount(13); // count 会是 3</code></pre>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h4 class="text-lg font-medium mb-2 text-sky-700 dark:text-sky-300"><code>__builtin_clz(x)</code> / <code>__builtin_clzll(x)</code></h4>
+                    <p class="mb-2 text-sm sm:text-base">返回 x 二进制表示中前导零的个数 (Count Leading Zeros)。如果 x 为 0，结果未定义。</p>
+                    <pre><code class="language-cpp">// 例: 对于32位整数，计算 16 (二进制 ...00010000) 的前导零
+// 假设int是32位: ...00000000000000000000000000010000 (27个前导0)
+int leading_zeros = __builtin_clz(16); // leading_zeros 会是 27 (对于32位int)</code></pre>
+                </div>
+                 <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h4 class="text-lg font-medium mb-2 text-sky-700 dark:text-sky-300"><code>__builtin_ctz(x)</code> / <code>__builtin_ctzll(x)</code></h4>
+                    <p class="mb-2 text-sm sm:text-base">返回 x 二进制表示中末尾零的个数 (Count Trailing Zeros)。如果 x 为 0，结果未定义。</p>
+                    <pre><code class="language-cpp">// 例: 计算 24 (二进制 ...00011000) 的末尾零
+int trailing_zeros = __builtin_ctz(24); // trailing_zeros 会是 3</code></pre>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-sky-500">
+                    <h4 class="text-lg font-medium mb-2 text-sky-700 dark:text-sky-300"><code>__builtin_ffs(x)</code> / <code>__builtin_ffsll(x)</code></h4>
+                    <p class="mb-2 text-sm sm:text-base">返回 x 二进制表示中最后一个（最右边）为 1 的位是从右到左的第几位（从1开始计数）。如果 x 为 0，返回 0。</p>
+                    <pre><code class="language-cpp">// 例: 12 (二进制 ...1100)
+int first_set_bit_pos = __builtin_ffs(12); // first_set_bit_pos 会是 3 (第3位是1)</code></pre>
+                     <p class="text-sm sm:text-base"><strong>注意:</strong> <code>__builtin_ctz(x) + 1</code> 等价于 <code>__builtin_ffs(x)</code> (当 x 非0时)。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Applications -->
+        <section id="applications" class="mb-12 fade-in-section">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-6 pb-2 border-b border-slate-300 dark:border-slate-700 text-sky-600 dark:text-sky-400 flex items-center">
+                <i class="fas fa-project-diagram mr-3"></i>主要应用
+            </h2>
+            <ul class="list-disc list-inside space-y-2 text-base sm:text-lg">
+                <li><strong class="text-sky-600 dark:text-sky-400">状态压缩动态规划 (DP)：</strong>用一个整数的二进制位表示集合状态，常用于解决子集相关问题。</li>
+                <li><strong class="text-sky-600 dark:text-sky-400">树状数组 (Fenwick Tree)：</strong>利用 <code>lowbit</code> 操作高效实现单点修改和区间查询。</li>
+                <li><strong class="text-sky-600 dark:text-sky-400">权限管理：</strong>用二进制位表示不同权限，通过位运算进行权限的赋予、撤销和检查。</li>
+                <li><strong class="text-sky-600 dark:text-sky-400">优化计算：</strong>代替乘除2的幂次运算，快速判断奇偶等。</li>
+                <li><strong class="text-sky-600 dark:text-sky-400">数据结构优化：</strong>例如在位图 (Bitmap) 中紧凑存储大量布尔标记。</li>
+                <li><strong class="text-sky-600 dark:text-sky-400">图论：</strong>在一些特定图算法中，例如枚举子集。</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-100 dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 fade-in-section">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-slate-600 dark:text-slate-400 text-sm">
+            <p class="mb-1">作者: XSVM</p>
+            <p>&copy; 2024 版权所有。内容基于 <a href="https://oi-wiki.org/math/bit/" target="_blank" rel="noopener noreferrer" class="text-sky-500 hover:text-sky-600 underline">OI Wiki - 位运算</a> 进行改编和可视化。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+        const sunIcon = darkModeToggle.querySelector('.fa-sun');
+        const moonIcon = darkModeToggle.querySelector('.fa-moon');
+
+        // Check local storage or system preference
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        } else {
+            htmlElement.classList.remove('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            sunIcon.classList.toggle('hidden');
+            moonIcon.classList.toggle('hidden');
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Fade-in sections on scroll
+        const fadeInSections = document.querySelectorAll('.fade-in-section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Optional: stop observing once visible
+                }
+            });
+        }, observerOptions);
+
+        fadeInSections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Copy to clipboard for code blocks
+        document.querySelectorAll('pre').forEach(preElement => {
+            const codeElement = preElement.querySelector('code');
+            if (codeElement) {
+                const copyButton = document.createElement('button');
+                copyButton.className = 'copy-button group';
+                copyButton.innerHTML = '<i class="fas fa-copy"></i><span class="tooltip">复制</span>';
+                
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(codeElement.innerText)
+                        .then(() => {
+                            const tooltip = copyButton.querySelector('.tooltip');
+                            tooltip.textContent = '已复制!';
+                            setTimeout(() => {
+                                tooltip.textContent = '复制';
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            console.error('无法复制文本: ', err);
+                            const tooltip = copyButton.querySelector('.tooltip');
+                            tooltip.textContent = '复制失败';
+                             setTimeout(() => {
+                                tooltip.textContent = '复制';
+                            }, 2000);
+                        });
+                });
+                preElement.appendChild(copyButton);
+            }
+        });
+
+        // Interactive Bitwise Operations
+        function toBinaryString(num, bits = 8) {
+            if (isNaN(num)) return 'N/A'.padStart(bits, ' ');
+            // For negative numbers, show 32-bit 2's complement
+            if (num < 0) bits = 32;
+            let binary = (num >>> 0).toString(2); // Unsigned right shift for 32-bit binary
+            if (num < 0) {
+                 return binary.padStart(32, '0');
+            }
+            return binary.padStart(bits, '0');
+        }
+        
+        function formatBinaryForDisplay(binaryStr) {
+            // Add spaces every 4 bits for readability, from the right
+            let parts = [];
+            for (let i = binaryStr.length; i > 0; i -= 4) {
+                parts.unshift(binaryStr.substring(Math.max(0, i - 4), i));
+            }
+            return parts.join(' ');
+        }
+
+
+        document.querySelectorAll('.interactive-bitwise').forEach(container => {
+            const num1Input = container.querySelector('.num1');
+            const num2Input = container.querySelector('.num2');
+            const resultArea = container.querySelector('.result-area');
+            const operator = container.dataset.operator;
+
+            function calculateAndDisplay() {
+                const val1 = parseInt(num1Input.value);
+                const val2 = parseInt(num2Input.value);
+
+                if (isNaN(val1) || isNaN(val2)) {
+                    resultArea.innerHTML = '请输入有效的数字。';
+                    return;
+                }
+                
+                // Determine appropriate bit length, at least 8, or enough for the numbers
+                const maxVal = Math.max(Math.abs(val1), Math.abs(val2));
+                let bitLength = 8;
+                if (maxVal > 255) bitLength = 16;
+                if (maxVal > 65535) bitLength = 32;
+                if (val1 < 0 || val2 < 0) bitLength = 32; // Use 32-bit for negative numbers
+
+                let result;
+                switch (operator) {
+                    case '&': result = val1 & val2; break;
+                    case '|': result = val1 | val2; break;
+                    case '^': result = val1 ^ val2; break;
+                    case '<<': result = val1 << val2; break;
+                    case '>>': result = val1 >> val2; break; // Arithmetic right shift in JS
+                    default: resultArea.innerHTML = '未知运算符'; return;
+                }
+                
+                // Use 32-bit representation for negative numbers or large shifts
+                let displayBitLength = bitLength;
+                if (operator === '<<' || operator === '>>') {
+                    if (val1 < 0 || val2 < 0 || val2 > 16 || Math.abs(val1) > 65535) displayBitLength = 32;
+                }
+
+
+                resultArea.innerHTML = `
+                    <div class="grid grid-cols-[auto_1fr_auto] gap-x-2 items-center font-mono">
+                        <span></span> <span class="text-right">${formatBinaryForDisplay(toBinaryString(val1, displayBitLength))}</span> <span>(${val1})</span>
+                        <span class="text-lg">${operator}</span> <span class="text-right">${formatBinaryForDisplay(toBinaryString(val2, displayBitLength))}</span> <span>(${val2})</span>
+                        <hr class="col-span-3 my-1 border-slate-300 dark:border-slate-600">
+                        <span>=</span> <span class="text-right font-bold text-sky-500">${formatBinaryForDisplay(toBinaryString(result, displayBitLength))}</span> <span class="font-bold text-sky-500">(${result})</span>
+                    </div>
+                `;
+            }
+            num1Input.addEventListener('input', calculateAndDisplay);
+            num2Input.addEventListener('input', calculateAndDisplay);
+        });
+
+        document.querySelectorAll('.interactive-bitwise-unary').forEach(container => {
+            const num1Input = container.querySelector('.num1');
+            const resultArea = container.querySelector('.result-area');
+            const operator = container.dataset.operator;
+
+            function calculateAndDisplayUnary() {
+                const val1 = parseInt(num1Input.value);
+                if (isNaN(val1)) {
+                    resultArea.innerHTML = '请输入有效的数字。';
+                    return;
+                }
+
+                let bitLength = 8;
+                if (Math.abs(val1) > 255) bitLength = 16;
+                if (Math.abs(val1) > 65535 || val1 < 0) bitLength = 32;
+                
+                let result;
+                if (operator === '~') {
+                    result = ~val1;
+                    // ~ in JS is 32-bit.
+                    bitLength = 32;
+                } else {
+                    resultArea.innerHTML = '未知一元运算符'; return;
+                }
+                
+                resultArea.innerHTML = `
+                    <div class="grid grid-cols-[auto_1fr_auto] gap-x-2 items-center font-mono">
+                        <span class="text-lg">${operator}</span> <span class="text-right">${formatBinaryForDisplay(toBinaryString(val1, bitLength))}</span> <span>(${val1})</span>
+                        <hr class="col-span-3 my-1 border-slate-300 dark:border-slate-600">
+                        <span>=</span> <span class="text-right font-bold text-sky-500">${formatBinaryForDisplay(toBinaryString(result, bitLength))}</span> <span class="font-bold text-sky-500">(${result})</span>
+                    </div>
+                `;
+            }
+            num1Input.addEventListener('input', calculateAndDisplayUnary);
+        });
+
+    </script>
+</body>
+</html>

@@ -208,7 +208,7 @@ export default defineConfig({
             collapsed: false,
             items: [
               { text: '蓝桥骑士——最长上升子序列（LIS）', link: '/蓝桥骑士——最长上升子序列（LIS）' },
-              { text: '蓝桥骑士——最长上升子序列（LIS）', link: '/hello.html' },
+              { text: '位运算', link: '/位运算.html' ,target: '_blank' },
             ],
           },
         ],
