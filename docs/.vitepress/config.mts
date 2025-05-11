@@ -193,8 +193,22 @@ export default defineConfig({
             text: '数学',
             collapsed: false,
             items: [
+              { text: '快速幂', link: '/快速幂' },
               { text: '最大公约数（GCD）', link: '/最大公约数（GCD）' },
               { text: '最小公倍数（LCM）', link: '/最小公倍数（LCM）' },
+              { text: '最大质因数', link: '/最大质因数' },
+              { text: '分解质因数', link: '/分解质因数' },
+              { text: '高精度加法', link: '/高精度加法' },
+              
+            ],
+          },
+          {
+            //子标题
+            text: '动态规划',
+            collapsed: false,
+            items: [
+              { text: '蓝桥骑士——最长上升子序列（LIS）', link: '/蓝桥骑士——最长上升子序列（LIS）' },
+              { text: '蓝桥骑士——最长上升子序列（LIS）', link: '/hello.html' },
             ],
           },
         ],
