@@ -259,7 +259,7 @@ export default defineConfig({
         text: '开发项目',
         collapsed: false,
         items: [
-          { text: '记单词app项目开发记录', link: '/记单词app项目开发记录' },
+          // { text: '记单词app项目开发记录', link: '/记单词app项目开发记录' },
         ],
       },
       {
