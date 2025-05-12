@@ -112,7 +112,7 @@ export default defineConfig({
     // logo: '/logo.png',
     logo: 'https://img.icons8.com/?size=96&id=Fqihn9MGe0kQ&format=png', //远程引用
     //siteTitle: false, //标题隐藏
-
+    
     //设置站点标题 会覆盖title
     //siteTitle: 'Hello World',
 
@@ -212,6 +212,7 @@ export default defineConfig({
             ],
           },
         ],
+        
       },
       {
         //分组标题1
@@ -422,7 +423,4 @@ export default defineConfig({
     },
 
   },
-
-
-
 })
