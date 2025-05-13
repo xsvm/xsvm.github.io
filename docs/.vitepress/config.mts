@@ -199,7 +199,7 @@ export default defineConfig({
               { text: '最大质因数', link: '/最大质因数' },
               { text: '分解质因数', link: '/分解质因数' },
               { text: '高精度加法', link: '/高精度加法' },
-              
+              { text: '位运算', link: '/位运算.html' ,target: '_blank' },
             ],
           },
           {
@@ -207,8 +207,26 @@ export default defineConfig({
             text: '动态规划',
             collapsed: false,
             items: [
-              { text: '蓝桥骑士——最长上升子序列（LIS）', link: '/蓝桥骑士——最长上升子序列（LIS）' },
-              { text: '位运算', link: '/位运算.html' ,target: '_blank' },
+              { text: '蓝桥骑士——最长上升子序列（LIS）', link: '/最长上升子序列（LIS）' },
+              {
+                //子标题
+                text: '树形DP',
+                collapsed: true,
+                items: [
+                  { text: '生产车间', link: '/生产车间' },
+                ],
+              },
+              {
+                //子标题
+                text: '背包问题',
+                collapsed: true,
+                items: [
+                  { text: '0-1背包', link: '/0-1背包' },
+                  { text: '完全背包', link: '/完全背包' },
+                  { text: '多重背包', link: '/多重背包' },
+                  { text: '分组背包', link: '/分组背包' },
+                ],
+              },
             ],
           },
         ],
