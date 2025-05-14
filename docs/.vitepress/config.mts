@@ -18,6 +18,7 @@ export default defineConfig({
   // #region fav
   head: [
     ['link', { rel: 'icon', href: 'https://img.icons8.com/?size=96&id=Fqihn9MGe0kQ&format=png' }],
+    ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/vitepress-plugin-codeblocks-fold@1.0.1/index.css' }]
   ],
   // #endregion fav 
 
@@ -78,7 +79,7 @@ export default defineConfig({
 
       md.use(groupIconMdPlugin) //代码组图标
       md.use(markdownItTaskCheckbox) //todo
-      md.use(MermaidMarkdown); 
+      md.use(MermaidMarkdown);
 
     }
 
@@ -207,7 +208,7 @@ export default defineConfig({
             text: '动态规划',
             collapsed: false,
             items: [
-              { text: '蓝桥骑士——最长上升子序列（LIS）', link: '/最长上升子序列（LIS）' },
+              { text: '最长上升子序列（LIS）', link: '/最长上升子序列（LIS）' },
               {
                 //子标题
                 text: '树形DP',
@@ -227,6 +228,14 @@ export default defineConfig({
                   { text: '分组背包', link: '/分组背包' },
                 ],
               },
+            ],
+          },
+          {
+            //子标题
+            text: '其他',
+            collapsed: false,
+            items: [
+              { text: '并查集', link: '/并查集' },
             ],
           },
         ],
@@ -292,6 +301,7 @@ export default defineConfig({
           { text: '创作类提示词', link: '/创作类提示词' },
         ],
       },
+      
       // {
       //   //分组标题2
       //   text: '基础配置',

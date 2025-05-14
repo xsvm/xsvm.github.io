@@ -16,6 +16,7 @@
     "pdfjs-dist": "^5.1.91",
     "sass": "^1.85.1",
     "vitepress": "^1.6.3",
+    "vitepress-plugin-codeblocks-fold": "^1.2.35",
     "vitepress-plugin-comment-with-giscus": "^1.1.15",
     "vitepress-plugin-group-icons": "^1.3.6",
     "vitepress-plugin-mermaid": "^2.0.17",

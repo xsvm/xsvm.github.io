@@ -1,5 +1,6 @@
 import DefaultTheme from 'vitepress/theme'
-
+import codeblocksFold from 'vitepress-plugin-codeblocks-fold'; // import method
+import 'vitepress-plugin-codeblocks-fold/style/index.css'; // import style
 // giscusTalk
 // import giscusTalk from 'vitepress-plugin-comment-with-giscus';
 // 进度条
@@ -133,7 +134,7 @@ export default {
     //   //您可以使用“comment:true”序言在页面上单独启用它
     //   true
     // );
-
+    
   },
 
 }

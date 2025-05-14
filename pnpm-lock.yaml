@@ -61,6 +61,9 @@ devDependencies:
   vitepress:
     specifier: ^1.6.3
     version: 1.6.3(@algolia/client-search@5.20.1)(less@4.2.2)(markdown-it-mathjax3@4.3.2)(sass@1.85.1)(search-insights@2.17.0)
+  vitepress-plugin-codeblocks-fold:
+    specifier: ^1.2.35
+    version: 1.2.35
   vitepress-plugin-comment-with-giscus:
     specifier: ^1.1.15
     version: 1.1.15(vue@3.5.13)
@@ -3341,6 +3344,10 @@ packages:
       sass: 1.85.1
     optionalDependencies:
       fsevents: 2.3.3
+    dev: true
+
+  /vitepress-plugin-codeblocks-fold@1.2.35:
+    resolution: {integrity: sha512-542i4x4s6WyNOAbS6/Gxcx+6V8jIMgCpFPdN1Tm1EMB5JL0o1LcaZ6VVZvYqLjx9sFyP797/AxVtLo6BRjqaTg==}
     dev: true
 
   /vitepress-plugin-comment-with-giscus@1.1.15(vue@3.5.13):
