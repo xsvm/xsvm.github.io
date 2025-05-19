@@ -186,7 +186,6 @@ export default defineConfig({
         text: '算法',
         collapsed: false,
         items: [
-          
           { text: 'BF算法', link: '/BF算法' },
           { text: 'KMP算法', link: '/KMP算法' },
           {
@@ -231,6 +230,24 @@ export default defineConfig({
             ],
           },
           {
+            //分组标题1
+            text: '排序',
+            collapsed: true,
+            items: [
+              { text: '各大排序算法', link: '/排序/各大排序算法' },
+              { text: '冒泡排序', link: '/排序/冒泡排序' },
+              { text: '选择排序', link: '/排序/选择排序' },
+              { text: '插入排序', link: '/排序/插入排序' },
+              { text: '希尔排序', link: '/排序/希尔排序' },
+              { text: '归并排序', link: '/排序/归并排序' },
+              { text: '快速排序', link: '/排序/快速排序' },
+              { text: '堆排序', link: '/排序/堆排序' },
+              { text: '计数排序', link: '/排序/计数排序' },
+              { text: '桶排序', link: '/排序/桶排序' },
+              { text: '基数排序', link: '/排序/基数排序' }
+            ],
+          },
+          {
             //子标题
             text: '其他',
             collapsed: false,
@@ -239,7 +256,6 @@ export default defineConfig({
             ],
           },
         ],
-        
       },
       {
         //分组标题1
@@ -255,6 +271,7 @@ export default defineConfig({
         text: 'LeetCode',
         collapsed: false,
         items: [
+          { text: '75. 颜色分类（荷兰国旗问题）', link: '/leetcode/75. 颜色分类（荷兰国旗问题）' },
         ],
       },
       {

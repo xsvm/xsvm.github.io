@@ -9,7 +9,7 @@ hero:
   text: "Welcome!"
   tagline: 学无止境，积少成多。
   image:
-    src: /首页.png
+    src: https://img.picui.cn/free/2025/05/15/6824c7ec3ba96.png
     alt: VitePress
   actions:
     # - theme: brand
