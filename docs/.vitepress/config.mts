@@ -227,6 +227,21 @@ export default defineConfig({
                   { text: '分组背包', link: '/分组背包' },
                 ],
               },
+              {
+                //子标题
+                text: '图论',
+                collapsed: true,
+                items: [
+                  {
+                    //子标题
+                    text: 'DFS',
+                    collapsed: true,
+                    items: [
+                      { text: '马走日', link: '/马走日' },
+                    ],
+                  },
+                ],
+              },
             ],
           },
           {
