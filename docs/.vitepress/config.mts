@@ -208,6 +208,7 @@ export default defineConfig({
             collapsed: false,
             items: [
               { text: '最长上升子序列（LIS）', link: '/最长上升子序列（LIS）' },
+              { text: '最长公共子序列(LCS)', link: '/最长公共子序列(LCS)' },
               {
                 //子标题
                 text: '树形DP',
@@ -268,6 +269,8 @@ export default defineConfig({
             collapsed: false,
             items: [
               { text: '并查集', link: '/并查集' },
+              { text: '栈的基本操作', link: '/栈的基本操作' },
+              { text: '好数', link: '/好数' },
             ],
           },
         ],
