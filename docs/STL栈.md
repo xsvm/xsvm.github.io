@@ -42,7 +42,7 @@ NO
 ```
 
 ## 题解
-这道题目可以直接使用C++ STL中的stack容器来实现。stack容器提供了我们需要的所有基本操作：push、pop、empty和top（用于query操作）。
+stack容器提供了我们需要的所有基本操作：push、pop、empty和top（用于query操作）。
 
 ### 解题思路
 1. 使用stack<int>声明一个整型栈
