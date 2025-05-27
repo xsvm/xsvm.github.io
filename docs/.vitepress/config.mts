@@ -246,7 +246,7 @@ export default defineConfig({
                     text: '最短路径',
                     collapsed: true,
                     items: [
-                      { text: '最短路径(Dijkstra、Floyd)', link: '/最短路径(Dijkstra、Floyd)' },
+                      { text: '最短路径无向图(Dijkstra、Floyd)', link: '/最短路径无向图(Dijkstra、Floyd)' },
                     ],
                   },
                 ],
@@ -290,6 +290,7 @@ export default defineConfig({
         items: [
           { text: '大纲', link: '/数据结构大纲' },
           { text: '链表', link: '/链表' },
+          { text: '二叉树', link: '/二叉树' },
         ],
       },
       {
