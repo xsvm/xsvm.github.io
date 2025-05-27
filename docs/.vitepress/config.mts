@@ -241,6 +241,14 @@ export default defineConfig({
                       { text: '马走日', link: '/马走日' },
                     ],
                   },
+                  {
+                    //子标题
+                    text: '最短路径',
+                    collapsed: true,
+                    items: [
+                      { text: '最短路径(Dijkstra、Floyd)', link: '/最短路径(Dijkstra、Floyd)' },
+                    ],
+                  },
                 ],
               },
             ],
