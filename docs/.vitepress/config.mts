@@ -243,6 +243,14 @@ export default defineConfig({
                   },
                   {
                     //子标题
+                    text: 'BFS',
+                    collapsed: true,
+                    items: [
+                      { text: '捡起鞋子', link: '/捡起鞋子' },
+                    ],
+                  },
+                  {
+                    //子标题
                     text: '最短路径',
                     collapsed: true,
                     items: [
@@ -279,6 +287,7 @@ export default defineConfig({
               { text: '并查集', link: '/并查集' },
               { text: '栈的基本操作', link: '/栈的基本操作' },
               { text: '好数', link: '/好数' },
+              { text: '函数值的积', link: '/函数值的积' },
             ],
           },
         ],
